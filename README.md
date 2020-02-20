@@ -6,13 +6,20 @@
 - 3.mysql/h2数据库
 - 4.Boostrap
 - 5.SpringMVC
-- 6.Flyway
+- 6.Flyway，这个也失败了，mysql5.0，它不支持
 - 7.Heroku
 - 8.GitHub
 - 9.Restfl
 
 社区中的功能点：
 - 1.github第三方登录
-- 2.内置H2数据库
+- 2.内置H2数据库,失败了，搞半天不出来换了mysql
 
+---
+2020/02/20:完成了
+>github登录
+>>问题发布
+>>>首页问题的分页展示...等一系列功能
+    
 持续更新中...
+         

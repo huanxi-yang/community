@@ -4,7 +4,7 @@ import cn.fzkj.community.domain.User;
 import cn.fzkj.community.dto.AccessTokenDTO;
 import cn.fzkj.community.dto.GitHubUser;
 import cn.fzkj.community.provider.GitHubProvider;
-import cn.fzkj.community.service.GitHubService;
+import cn.fzkj.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,9 +21,8 @@ public class GitHubController {
 
     @Autowired
     private GitHubProvider gitHubProvider;
-
     @Autowired
-    private GitHubService userService;
+    private UserService userService;
 
     @Value("${github.client_id}")
     private String client_id;
@@ -53,10 +52,9 @@ public class GitHubController {
             user.setName(gitHubUser.getName());
             String token = UUID.randomUUID().toString();
             user.setToken(token);
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(gitHubUser.getAvatarUrl());
-            userService.saveUser(user);
+            //判断数据库中是否已经存在该用户
+            userService.createOrUpdate(user);
             response.addCookie(new Cookie("token",token)); //创建一个Cookie
             return "redirect:/";
         }else{

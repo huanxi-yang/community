@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,19 +32,7 @@ public class IndexController {
     @RequestMapping("/")
     public String index(HttpServletRequest request, Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page){
-        Cookie[] cookies = request.getCookies();
-        if(cookies.length!=0 && cookies!=null){
-            for (Cookie cookie:cookies) {
-                if(cookie.getName().equals("token")){
-                    String token = cookie.getValue();
-                    User user = userService.findByToken(token);
-                    if(user!=null){
-                        request.getSession().setAttribute("user",user);
-                    }
-                    break;
-                }
-            }
-        }
+
         PageBean<QuestionDTO> pageBean = questionService.questionList(page);
         model.addAttribute("pageBean",pageBean);
         return "index";
@@ -52,6 +41,16 @@ public class IndexController {
     @RequestMapping("/toLogin.action")
     public String toLogin(){
         return "login";
+    }
+
+    @RequestMapping("/logout.action")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 
 }

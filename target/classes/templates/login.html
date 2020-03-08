@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>login</title>
@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <script src="js/bootstrap.min.js"></script>
-    <link rel="import" href="top_not_use.html" />
+    <link rel="import" href="menu.html" />
 </head>
 <body>
+
+<div th:insert="~{menu :: menu}"></div>
 
 <form class="form-horizontal" >
     <div class="form-group">

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="css/log.css">
+    <script src="js/jquery-3.4.1.min.js"/>
+
+
+    <script>
+        $(".textb input").on("focus",function(){
+            $(this).addClass("focus");
+        });
+
+        $(".textb input").on("blur",function(){
+            if($(this).val() == "")
+                $(this).removeClass("focus");
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <from action="" class="login-form">
+        <h1>Login</h1>
+
+        <div class="textb">
+            <input type="text">
+            <span data-placeholder="Username"></span>
+        </div>
+
+        <div class="textb">
+            <input type="password">
+            <span data-placeholder="Password"></span>
+        </div>
+
+        <input type="submit" class="loginbtn" value="Login">
+
+        <div class="button-text">
+            Don't have account?<a href="#">Sign up</a>
+        </div>
+
+    </from>
+
+
+</body>
+</html>

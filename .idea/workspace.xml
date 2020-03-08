@@ -55,9 +55,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -87,7 +87,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mybatisgeneretor" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.14814815" />
@@ -96,8 +96,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\mapper" />
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\css" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="cn.fzkj.community" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\photo" />
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\templates" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\js" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static" />
     </key>
@@ -129,12 +137,7 @@
     <option name="allServicesViewState">
       <serviceView>
         <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@8728acbc" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-          </expand>
+          <expand />
           <select />
         </treeState>
       </serviceView>
@@ -156,7 +159,21 @@
       <workItem from="1582177657394" duration="1672000" />
       <workItem from="1582179606225" duration="1097000" />
       <workItem from="1582182035770" duration="10575000" />
-      <workItem from="1582203036028" duration="420000" />
+      <workItem from="1582203036028" duration="600000" />
+      <workItem from="1582257060419" duration="3904000" />
+      <workItem from="1582289940369" duration="63419000" />
+      <workItem from="1582900278456" duration="1940000" />
+      <workItem from="1582949613569" duration="3921000" />
+      <workItem from="1582960310851" duration="7463000" />
+      <workItem from="1583036764637" duration="3655000" />
+      <workItem from="1583121888358" duration="1268000" />
+      <workItem from="1583141158186" duration="1129000" />
+      <workItem from="1583142986902" duration="108000" />
+      <workItem from="1583243833548" duration="41000" />
+      <workItem from="1583390793232" duration="1806000" />
+      <workItem from="1583396348943" duration="517000" />
+      <workItem from="1583396898471" duration="10710000" />
+      <workItem from="1583568926408" duration="15913000" />
     </task>
     <servers />
   </component>
@@ -166,6 +183,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -175,5 +217,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/fzkj/community/controller/IndexController.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${sectionName}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/community.css">
+</head>
+
+<body>
+
+<div th:insert="~{menu :: menu}"></div>
+
+<!-- 发起弹出框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">发起问题</h4>
+            </div>
+            <form action="/publish.action" onsubmit="return check();">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="写下你的问题..." id="title" name="title"><span id="titlespan"></span>
+                    </div>
+                    <textarea id="description" class="form-control" rows="3" placeholder="问题背景、条件等详细信息..." name="description"></textarea><span id="desspan"></span><br>
+                    <input list="categrioes" class="form-control" placeholder="选择分类" name="tag" id="tag"><span id="tagspan"></span>
+                    <datalist id="categrioes" >
+                        <option value="科技" />
+                        <option value="人文"/>
+                        <option value="爱好"/>
+                        <option value="bala"/>
+                    </datalist>
+                    <br>
+                    <input type="text" class="form-control" placeholder="创建或搜索添加新话题" style="width: 40%">
+                </div>
+                <div class="modal-footer">
+                    <div class="alert alert-warning alert-dismissible" role="alert" style="display: none" id="error">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-success" id="btnSubmit">发布</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid main profile">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2 th:text="${sectionName}"></h2>
+            <hr>
+            <div th:if="${pageBean != null}" >
+            <div class="media" th:each="question:${pageBean.pageRecode}">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-circle" th:src="${question.user.avatarUrl}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading" th:text="${question.title}" th:href="'/question/'+${question.id}"></h4>
+                    <span class="topic-info">• <sapn th:text="${question.attentionCount}"></sapn> 个评论 • <sapn th:text="${question.viewCount}"></sapn> 次浏览 • <sapn th:text="${question.likeCount}"></sapn> 次收藏 • <sapn th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></sapn> 发表</span>
+                </div>
+                <hr>
+            </div></div>
+
+            <!-- 分页 -->
+            <nav aria-label="Page navigation" th:align="right" th:if="${pageBean != null && pageBean.totalPage>1}">
+                <ul class="pagination">
+                    <li th:if="${pageBean.totalPage>5 && pageBean.page!=1}">
+                        <a aria-label="Previous" th:href="@{'/profile/'+${section}(page=${pageBean.page})}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li  th:each="page:${pageBean.pages}"><a th:href="@{'/profile/'+${section}(page=${page})}" th:text="${page}"></a></li>
+                    <li>
+                        <a th:href="@{'/profile/'+${section}(page=${pageBean.page+1})}" aria-label="Next" th:if="${pageBean.totalPage>5 && pageBean.totalPage != pageBean.page}">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <div class="list-group section">
+                <a href="/profile/questions" th:class="${section == 'questions'}? 'list-group-item active':'list-group-item' ">我的问题 <span class="badge">2</span></a>
+                <a href="/profile/reply" th:class="${section == 'reply'}? 'list-group-item active':'list-group-item' ">我的回复<span class="badge">3</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

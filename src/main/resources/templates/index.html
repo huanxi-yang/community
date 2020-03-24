@@ -49,6 +49,14 @@
             return false;
         }
     }
+    
+    window.onload = function () {
+        var item = window.localStorage.getItem("localS");
+        if(item == "true"){
+            window.close();
+            window.localStorage.removeItem("localS");
+        }
+    }
 
 
 </script>
@@ -110,7 +118,7 @@
                         <h4 class="media-heading">
                             <a th:href="'/question/'+${question.id}" th:text="${question.title}"></a>
                         </h4>
-                        <span class="topic-info">• <sapn th:text="${question.attentionCount}"></sapn> 个评论 • <sapn th:text="${question.viewCount}"></sapn> 次浏览 • <sapn th:text="${question.likeCount}"></sapn> 次收藏 • <sapn th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></sapn> 发表</span>
+                        <span class="topic-info">• <sapn th:text="${question.commentCount}"></sapn> 个评论 • <sapn th:text="${question.viewCount}"></sapn> 次浏览 • <sapn th:text="${question.likeCount}"></sapn> 次收藏 • <sapn th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></sapn> 发表</span>
                     </div>
                     <hr>
                 </div>

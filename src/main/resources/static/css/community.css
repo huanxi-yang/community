@@ -21,3 +21,27 @@ body{
 .profile .section{
     margin-top: 20px;
 }
+
+.comment{
+    margin: 10px 0;
+}
+
+.topic-info .icon{
+    padding-right: 10px;
+    font-size:16px;
+    cursor: pointer;
+}
+
+.topic-info .active{
+    color: #499ef3;
+}
+
+.topic-info .icon:hover{
+    color: #499ef3;
+}
+
+.row .erjipinglun{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+

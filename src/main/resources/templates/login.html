@@ -6,50 +6,54 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/log.css">
     <script src="js/bootstrap.min.js"></script>
     <link rel="import" href="menu.html" />
 </head>
 <body>
 
-<div th:insert="~{menu :: menu}"></div>
+<from action="#" class="login-form">
+    <h1>Login</h1>
 
-<form class="form-horizontal" >
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">账号</label>
-        <div class="col-sm-5">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="账号">
-        </div>
+    <div class="textb">
+        <input type="text">
+        <span data-placeholder="Username"></span>
     </div>
-    <div class="form-group">
-        <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-        <div class="col-sm-5">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="密码">
-        </div>
+
+    <div class="textb">
+        <input type="password">
+        <span data-placeholder="Password"></span>
     </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"> Remember me
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">登录</button>
-        </div>
-    </div>
+
+    <input type="submit" class="loginbtn" value="Login">
+
+    <!-- <div class="button-text">
+        Don't have account?<a href="#">Sign up</a>
+    </div> -->
     <hr>
-    <div class="form-group">
+    <br>
+    <div class="github">
         <div class="col-sm-offset-2 col-sm-10">
-            <a href="https://github.com/login/oauth/authorize?client_id=724df6f6252b3c341a39&redirect_uri=http://localhost:8080/callback&scope=user&state=1">
-                <img src="photo/Github.png" height="32" width="32"/>
+            <a
+                    href="https://github.com/login/oauth/authorize?client_id=724df6f6252b3c341a39&redirect_uri=http://localhost:8080/callback&scope=user&state=1">
+                <img src="photo/Github.png" height="32" width="32" title="Github登录" />
             </a>
 
         </div>
-    </div>
 
-</form>
+</from>
+
+<!-- 放在form表单之后才生效 -->
+<script type="text/javascript">
+    $(".textb input").on("focus", function () {
+        $(this).addClass("focus");
+    });
+
+    $(".textb input").on("blur", function () {
+        if ($(this).val() == "")
+            $(this).removeClass("focus");
+    });
+</script>
+
 </body>
 </html>

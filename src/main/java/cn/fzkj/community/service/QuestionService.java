@@ -5,6 +5,9 @@ import cn.fzkj.community.domain.QuestionExample;
 import cn.fzkj.community.domain.User;
 import cn.fzkj.community.dto.PageBean;
 import cn.fzkj.community.dto.QuestionDTO;
+import cn.fzkj.community.exception.CustomErrorCode;
+import cn.fzkj.community.exception.CustomException;
+import cn.fzkj.community.mapper.QuestionExtMapper;
 import cn.fzkj.community.mapper.QuestionMapper;
 import cn.fzkj.community.mapper.UserMapper;
 import org.apache.ibatis.session.RowBounds;
@@ -17,11 +20,13 @@ import java.util.List;
 
 @Service
 public class QuestionService {
-    @Autowired(required = false)
+    @Autowired(required = false) //required = false :有就注入，没有就跳过
     private QuestionMapper questionMapper;
 
     @Autowired(required = false)
     private UserMapper userMapper;
+    @Autowired(required = false)
+    private QuestionExtMapper questionExtMapper;
 
     public void updateOrcreateQues(Question question) {
         if(question.getId()==null){
@@ -86,7 +91,7 @@ public class QuestionService {
     }
 
     //查询用户的问题集合返回
-    public PageBean<QuestionDTO> findUserQuestions(Integer id, Integer page) {
+    public PageBean<QuestionDTO> findUserQuestions(Long id, Integer page) {
         List<QuestionDTO> list = new ArrayList<>();
         PageBean<QuestionDTO> pagesinfo = new PageBean<>();
         //1.设置limit
@@ -138,8 +143,11 @@ public class QuestionService {
     }
 
     //通过问题的id查找
-    public QuestionDTO findQuestionById(Integer id) {
+    public QuestionDTO findQuestionById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
+        if(question == null){
+            throw new CustomException(CustomErrorCode.QUESTION_NOT_FIND);
+        }
         User user = userMapper.selectByPrimaryKey(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
@@ -147,4 +155,9 @@ public class QuestionService {
         return questionDTO;
     }
 
+    //实现阅读数的增加
+    public void incView(QuestionDTO questionDTO) {
+//        questionDTO.setViewCount(1);
+        questionExtMapper.incView(questionDTO);
+    }
 }

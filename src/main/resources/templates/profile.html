@@ -65,7 +65,7 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading" th:text="${question.title}" th:href="'/question/'+${question.id}"></h4>
-                    <span class="topic-info">• <sapn th:text="${question.attentionCount}"></sapn> 个评论 • <sapn th:text="${question.viewCount}"></sapn> 次浏览 • <sapn th:text="${question.likeCount}"></sapn> 次收藏 • <sapn th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></sapn> 发表</span>
+                    <span class="topic-info">• <sapn th:text="${question.commentCount}"></sapn> 个评论 • <sapn th:text="${question.viewCount}"></sapn> 次浏览 • <sapn th:text="${question.likeCount}"></sapn> 次收藏 • <sapn th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></sapn> 发表</span>
                 </div>
                 <hr>
             </div></div>

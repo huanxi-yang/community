@@ -6,7 +6,7 @@
 - 3.mysql/h2数据库
 - 4.Boostrap
 - 5.SpringMVC
-- 6.Flyway，这个也失败了，mysql5.0，它不支持
+- 6.Flyway
 - 7.Heroku
 - 8.GitHub
 - 9.Restfl
@@ -22,4 +22,6 @@
 >>>首页问题的分页展示...等一系列功能
     
 持续更新中...
+
+[文件拖拽上传](https://www.dropzonejs.com/)
          

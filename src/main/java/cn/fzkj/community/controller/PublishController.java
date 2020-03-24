@@ -24,7 +24,7 @@ public class PublishController {
 
     //发布和修改问题
     @RequestMapping("/publish.action")
-    public String publish(@RequestParam(value = "id", required = false) Integer id,@RequestParam("title") String title ,
+    public String publish(@RequestParam(value = "id", required = false) Long id,@RequestParam("title") String title ,
                           @RequestParam("description") String description ,
                           @RequestParam("tag") String tag,
                           HttpServletRequest request){
@@ -43,7 +43,7 @@ public class PublishController {
     }
 
     @RequestMapping("/publish/{id}")
-    public String edit(@PathVariable("id") Integer id,Model model){
+    public String edit(@PathVariable("id") Long id,Model model){
         //从数据库查询问题出来
         QuestionDTO questionDTO = questionService.findQuestionById(id);
         //回显到publish页面

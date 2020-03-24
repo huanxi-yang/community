@@ -35,29 +35,19 @@
         <item name="community: database" type="23e365eb:GenericImplModel$Database" />
         <item name="#1: schema" type="255a0c4b:GenericImplModel$Schema" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="community" type="feb32156:DbDataSourceImpl" />
-        <item name="community: database" type="23e365eb:GenericImplModel$Database" />
-        <item name="#1: schema" type="255a0c4b:GenericImplModel$Schema" />
-        <item name="question: table" type="49c4789a:GenericImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="community" type="feb32156:DbDataSourceImpl" />
-        <item name="community: database" type="23e365eb:GenericImplModel$Database" />
-        <item name="#1: schema" type="255a0c4b:GenericImplModel$Schema" />
-        <item name="user: table" type="49c4789a:GenericImplModel$Table" />
-      </path>
     </expand>
     <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="community" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -68,11 +58,14 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHome" value="D:/Maven/download/apache-maven-3.5.2-bin/apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="D:\Maven\download\apache-maven-3.5.2-bin\apache-maven-3.5.2\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
+        <option name="jdkForImporter" value="1.8" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
   </component>
@@ -87,27 +80,34 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mybatisgeneretor" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/mapper" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.14814815" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\mapper" />
-      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\css" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="cn.fzkj.community.service" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="cn.fzkj.community" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\mapper" />
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\css" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.fzkj.community.mapper" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\mapper" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\photo" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\templates" />
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\db\migration" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\js" />
-      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -173,7 +173,22 @@
       <workItem from="1583390793232" duration="1806000" />
       <workItem from="1583396348943" duration="517000" />
       <workItem from="1583396898471" duration="10710000" />
-      <workItem from="1583568926408" duration="15913000" />
+      <workItem from="1583568926408" duration="29722000" />
+      <workItem from="1583717443130" duration="3716000" />
+      <workItem from="1583755100445" duration="45000" />
+      <workItem from="1583806371087" duration="235000" />
+      <workItem from="1583984245025" duration="5860000" />
+      <workItem from="1584066367189" duration="11014000" />
+      <workItem from="1584236540596" duration="11266000" />
+      <workItem from="1584330224582" duration="10329000" />
+      <workItem from="1584362016390" duration="798000" />
+      <workItem from="1584417108466" duration="11120000" />
+      <workItem from="1584504584687" duration="15146000" />
+      <workItem from="1584783824631" duration="5626000" />
+      <workItem from="1584865266334" duration="7275000" />
+      <workItem from="1584872578858" duration="1337000" />
+      <workItem from="1584952734220" duration="1575000" />
+      <workItem from="1585012944098" duration="16165000" />
     </task>
     <servers />
   </component>
@@ -217,16 +232,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/fzkj/community/controller/IndexController.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

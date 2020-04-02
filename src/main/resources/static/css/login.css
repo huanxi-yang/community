@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-srif;
-    background: url(/photo/log.jpg);
+    background: url(/static/images/log.jpg);
     background-size: cover;
 }
 

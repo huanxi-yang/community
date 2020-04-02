@@ -2,6 +2,11 @@ body{
     background-color: #efefef;
 }
 
+/*.d{*/
+/*    margin:50px auto;*/
+/*    width:80%;*/
+/*}*/
+
 .main{
     background-color: white;
     margin: 30px;
@@ -43,5 +48,16 @@ body{
 .row .erjipinglun{
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.related .a{
+    text-decoration: none;
+}
+
+.related{
+    font-size: 14px;
+    line-height: 26px;
+    list-style:  none;
+    padding-left: 0;
 }
 

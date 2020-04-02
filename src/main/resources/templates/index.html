@@ -4,15 +4,29 @@
     <title>官方社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="js/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/editormd.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/community.js"></script>
+    <script src="/js/question.js"></script>
+    <script src="/js/editormd.min.js"></script>
+    <link rel="stylesheet" href="/css/community.css">
 </head>
 
 <script>
 
     $(document).ready(function(){
+        // // 实时显示输入的标签
+        // var text = $("#tag").val();
+        //
+        // $("#tag").keydown(function(){
+        //     $("#tagspan").text($("#tag").val());
+        // });
+        // $("#tag").keyup(function(){
+        //     $("#tagspan").text($("#tag").val());
+        // });
+
         $("#title").blur(function(){
                 if($("#title").val()==""){
                     $("#titlespan").text("Please Improving title");
@@ -23,11 +37,11 @@
                     $("#desspan").text("Please Improving description");
                 }
             });
-        $("#tag").blur(function(){
-                if($("#tag").val()==""){
-                    $("#tagspan").text("Please Improving tag");
-                }
-            });
+        // $("#tag").blur(function(){
+        //         if($("#tag").val()==""){
+        //             $("#tagspan").text("Please Improving tag");
+        //         }
+        //     });
         $("#title").focus(function(){
             $("#error").css("display","none");
         });
@@ -39,17 +53,16 @@
         });
     });
 
+    // function reset(){
+    //     alert("lalas");
+    //     $("#question_freamwork")[0].reset();
+    //     $("#titlespan").text("");
+    //     $("#desspan").text("");
+    //     $("#tagspan").text("");
+    //     $("#tag-show").css("display","none");
+    //
+    // }
 
-
-    function check() {
-        //提交的时候检测文本框
-        if ($("#title").val() == "" || $("#description").val() == "" || $("#tag").val() == "") {
-            $("#error").text("Something Error Here!");
-            $("#error").css("display", "");
-            return false;
-        }
-    }
-    
     window.onload = function () {
         var item = window.localStorage.getItem("localS");
         if(item == "true"){
@@ -60,6 +73,12 @@
 
 
 </script>
+<style>
+    .d{
+        margin:50px auto;
+        width:80%;
+    }
+</style>
 
 <body>
 
@@ -73,27 +92,54 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">发起问题</h4>
             </div>
-            <form action="/publish.action" onsubmit="return check();">
+            <form action="/publish.action" onsubmit="return check();" id="question_freamwork">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="写下你的问题..." id="title" name="title"><span id="titlespan"></span>
+                        <input type="text" class="form-control" placeholder="写下你的问题..." id="title" name="title" autocomplete="off"><span id="titlespan"></span>
                     </div>
-                    <textarea id="description" class="form-control" rows="3" placeholder="问题背景、条件等详细信息..." name="description"></textarea><span id="desspan"></span><br>
-                    <input list="categrioes" class="form-control" placeholder="选择分类" name="tag" id="tag"><span id="tagspan"></span>
-                    <datalist id="categrioes" >
-                        <option value="科技" />
-                        <option value="人文"/>
-                        <option value="爱好"/>
-                        <option value="bala"/>
-                    </datalist>
+<!--                    <textarea id="description" class="form-control" rows="3" placeholder="问题背景、条件等详细信息..." name="description"></textarea><span id="desspan"></span><br>-->
+                    <div class="form-group" id="md-editor">
+                        <textarea id="description" style="display: none;" name="description" type="text"
+                                  class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                    <span id="desspan"></span>
+                    <script type="text/javascript">
+                        $(function() {
+                            var editor = editormd("md-editor", {
+                                width  : "100%",
+                                height : 580,
+                                delay: 0,
+                                watch: false,    // 是否显示预览
+                                placeholder: "写下你的问题~~",
+                                path   : "/md/lib/"
+                            });
+                        });
+                    </script>
+                    <span id="tagspan"></span>
+                    <input class="form-control" placeholder="输入标签,以英文逗号分割~~~" name="tag" id="tag" autocomplete="off">
                     <br>
-                    <input type="text" class="form-control" placeholder="创建或搜索添加新话题" style="width: 40%">
+
+                    <!--标签的提示-->
+                    <div id="tag-show" style="display: none;">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" th:each="category:${tags}">
+                                <a th:href="${'#'+category.categoryName}" aria-controls="home" role="tab" data-toggle="tab" th:text="${category.categoryName}"></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" style="margin: 10px">
+                            <div role="tabpanel" th:id="${category.categoryName}" th:each="category,stat:${tags}" th:class="${stat.first ? 'tab-pane active' : 'tab-pane'}">
+                                <span class="label label-info" style="margin: 5px 5px;white-space: normal;" th:each="tag:${category.tags}">
+                                    <span class="glyphicon glyphicon-tags" onclick="show(this)" th:data-tag="${tag}" th:text="${tag}"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <div class="alert alert-warning alert-dismissible" role="alert" style="display: none" id="error">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">取消</button>
                     <button type="submit" class="btn btn-success" id="btnSubmit">发布</button>
                 </div>
             </form>
@@ -102,7 +148,7 @@
 </div>
 
 
-<div class="container-fluid main">
+<div class="container-fluid main d">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="glyphicon glyphicon-list" aria-hidden="true"> 发现</span></h2>
@@ -127,8 +173,9 @@
             <!-- 分页 -->
             <nav aria-label="Page navigation" th:align="right" th:if="${pageBean != null && pageBean.totalPage>1}">
                 <ul class="pagination">
-                    <li th:if="${pageBean.totalPage>5 && pageBean.page!=1}">
-                        <a aria-label="Previous" th:href="@{'/?page=${pageBean.page-1}'}">
+                    <li th:if="${pageBean.totalPage > 5 && pageBean.page - 3 > 0}">
+                        <!-- 第一页 -->
+                        <a aria-label="Previous" href="/?page = 1">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
@@ -136,16 +183,27 @@
                         <a th:href="@{'/?page='+${page}}" th:text="${page}"></a>
                     </li>
                     <li>
-                        <a th:href="@{'/?page=${pageBean.page+1}'}" aria-label="Next" th:if="${pageBean.totalPage>5 && pageBean.totalPage != pageBean.page}">
+                        <!-- 最后一页 -->
+                        <a th:href="@{'/?page='+${pageBean.totalPage}}" aria-label="Next"
+                           th:if="${pageBean.totalPage > 5 && pageBean.page + 2 < pageBean.totalPage} ">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
                 </ul>
             </nav>
+
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h3>热门话题</h3>
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <!--微信-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>WeChat</h4>
+                <img class="img-thumbnail" src="/images/wechat.jpg"/>
+            </div>
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         </div>
+
     </div>
 </div>
 

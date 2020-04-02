@@ -45,8 +45,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -80,7 +80,8 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/mapper" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/css" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.14814815" />
@@ -95,19 +96,20 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="cn.fzkj.community" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\mapper" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\css" />
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static" />
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\js" />
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\md" />
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\photo" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="cn.fzkj.community.mapper" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\images" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\mapper" />
-      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\photo" />
-      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\templates" />
-      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\db\migration" />
-      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\js" />
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\css" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -188,7 +190,21 @@
       <workItem from="1584865266334" duration="7275000" />
       <workItem from="1584872578858" duration="1337000" />
       <workItem from="1584952734220" duration="1575000" />
-      <workItem from="1585012944098" duration="16165000" />
+      <workItem from="1585012944098" duration="17146000" />
+      <workItem from="1585132187165" duration="213000" />
+      <workItem from="1585187400687" duration="18624000" />
+      <workItem from="1585361131196" duration="13661000" />
+      <workItem from="1585449603349" duration="17079000" />
+      <workItem from="1585561920730" duration="929000" />
+      <workItem from="1585619703817" duration="9961000" />
+      <workItem from="1585653358612" duration="2000" />
+      <workItem from="1585653997484" duration="93000" />
+      <workItem from="1585655001487" duration="6000" />
+      <workItem from="1585718833554" duration="19799000" />
+      <workItem from="1585793424832" duration="4480000" />
+      <workItem from="1585798333254" duration="991000" />
+      <workItem from="1585799353022" duration="1133000" />
+      <workItem from="1585800509633" duration="12891000" />
     </task>
     <servers />
   </component>

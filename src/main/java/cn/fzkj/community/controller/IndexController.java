@@ -1,5 +1,6 @@
 package cn.fzkj.community.controller;
 
+import cn.fzkj.community.cache.TagCache;
 import cn.fzkj.community.domain.Question;
 import cn.fzkj.community.domain.User;
 import cn.fzkj.community.dto.PageBean;
@@ -35,6 +36,8 @@ public class IndexController {
 
         PageBean<QuestionDTO> pageBean = questionService.questionList(page);
         model.addAttribute("pageBean",pageBean);
+        // 添加标签库
+        model.addAttribute("tags", TagCache.getTag());
         return "index";
     }
 

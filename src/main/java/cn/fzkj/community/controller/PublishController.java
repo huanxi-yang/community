@@ -1,5 +1,6 @@
 package cn.fzkj.community.controller;
 
+import cn.fzkj.community.cache.TagCache;
 import cn.fzkj.community.domain.Question;
 import cn.fzkj.community.domain.User;
 import cn.fzkj.community.dto.QuestionDTO;
@@ -28,7 +29,7 @@ public class PublishController {
                           @RequestParam("description") String description ,
                           @RequestParam("tag") String tag,
                           HttpServletRequest request){
-        System.out.println(id);
+        System.out.println("id是:"+id);
         Question question = new Question();
         question.setTitle(title);
         question.setDescription(description);
@@ -48,6 +49,7 @@ public class PublishController {
         QuestionDTO questionDTO = questionService.findQuestionById(id);
         //回显到publish页面
         model.addAttribute("question",questionDTO);
+        model.addAttribute("tags", TagCache.getTag());
         //保存修改后的问题
 
         return "publish";

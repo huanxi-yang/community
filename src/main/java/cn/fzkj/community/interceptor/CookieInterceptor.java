@@ -1,6 +1,7 @@
 package cn.fzkj.community.interceptor;
 
 import cn.fzkj.community.domain.User;
+import cn.fzkj.community.service.Impl.NotificationService;
 import cn.fzkj.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,9 @@ public class CookieInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private NotificationService notificationService;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -27,6 +31,8 @@ public class CookieInterceptor implements HandlerInterceptor {
                     User user = userService.findByToken(token);
                     if(user!=null){
                         request.getSession().setAttribute("user",user);
+                        Long unreadCount = notificationService.unreadCount(user.getId());
+                        request.getSession().setAttribute("unreadCount",unreadCount);
                     }
                     break;
                 }

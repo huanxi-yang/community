@@ -10,6 +10,7 @@ import cn.fzkj.community.exception.CustomException;
 import cn.fzkj.community.mapper.QuestionExtMapper;
 import cn.fzkj.community.mapper.QuestionMapper;
 import cn.fzkj.community.mapper.UserMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -25,6 +27,7 @@ public class QuestionService {
 
     @Autowired(required = false)
     private UserMapper userMapper;
+
     @Autowired(required = false)
     private QuestionExtMapper questionExtMapper;
 
@@ -44,10 +47,11 @@ public class QuestionService {
         }
     }
 
-    //查询所有的问题回显到index页面nested exception is java.sql.SQLException: Field 'id' doesn't have a default value] with root cause
+    //查询所有的问题回显到index页面
     public PageBean<QuestionDTO> questionList(Integer page) {
         List<QuestionDTO> list = new ArrayList<>();
         PageBean<QuestionDTO> pagesinfo = new PageBean<>();
+        pagesinfo.setPage(page);
         //1.设置limit
         Integer limit = 5;
         pagesinfo.setLimit(limit);
@@ -66,9 +70,21 @@ public class QuestionService {
         List<Integer> pages = new ArrayList<>();
         //如果总页数大于7，就产生7个
         //如果总页数小于7.就显示全部
-        if(totalPage>7){
-            for(int i=page-3; i<8; i++){
-                pages.add(i);
+        if(totalPage > 5){
+            if (page - 2 <= 0){
+                for(int i=1; i< 6; i++){
+                    pages.add(i);
+                }
+            }
+            else if (page + 2 > totalPage){
+                for(int i=page-2; i< totalPage+1; i++){
+                    pages.add(i);
+                }
+            }
+            else{
+                for(int i=page-2; i < page+3; i++){
+                    pages.add(i);
+                }
             }
         }else{
             for(int i=1; i<totalPage+1; i++){
@@ -78,7 +94,9 @@ public class QuestionService {
         pagesinfo.setPages(pages);
         //5.设置每页的数据集合
         page = (page-1)*limit;  //计算每页开始的位置
-        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(new QuestionExample(),new RowBounds(page,limit));
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.setOrderByClause("gmt_create desc");
+        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample,new RowBounds(page,limit));
         for(Question question : questions){
             User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -94,6 +112,7 @@ public class QuestionService {
     public PageBean<QuestionDTO> findUserQuestions(Long id, Integer page) {
         List<QuestionDTO> list = new ArrayList<>();
         PageBean<QuestionDTO> pagesinfo = new PageBean<>();
+        pagesinfo.setPage(page);
         //1.设置limit
         Integer limit = 5;
         pagesinfo.setLimit(limit);
@@ -115,9 +134,21 @@ public class QuestionService {
         List<Integer> pages = new ArrayList<>();
         //如果总页数大于7，就产生7个
         //如果总页数小于7.就显示全部
-        if(totalPage>7){
-            for(int i=page-3; i<8; i++){
-                pages.add(i);
+        if(totalPage > 5){
+            if (page - 2 <= 0){
+                for(int i=1; i< 6; i++){
+                    pages.add(i);
+                }
+            }
+            else if (page + 2 > totalPage){
+                for(int i=page-2; i< totalPage+1; i++){
+                    pages.add(i);
+                }
+            }
+            else{
+                for(int i=page-2; i < page+3; i++){
+                    pages.add(i);
+                }
             }
         }else{
             for(int i=1; i<totalPage+1; i++){
@@ -160,4 +191,26 @@ public class QuestionService {
 //        questionDTO.setViewCount(1);
         questionExtMapper.incView(questionDTO);
     }
+
+    // 查找出相关问题
+    public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
+        if (StringUtils.isBlank(queryDTO.getTag())){
+            return new ArrayList<>();
+        }
+        String newTag = StringUtils.replace(queryDTO.getTag(), ",", "|").replace("，","|");
+        System.out.println("QuestionService lines 174: 分割之后的tag:"+newTag);
+        Question question = new Question();
+        question.setTag(newTag);
+        question.setId(queryDTO.getId());
+        List<Question> questions = questionExtMapper.selectRelated(question);
+
+        // 使用lamda表达式将Question类型的数组转化为QuestionDTO类型的数组
+        List<QuestionDTO> questionDTOS = questions.stream().map(q->{
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(q,questionDTO);
+            return questionDTO;
+        }).collect(Collectors.toList());
+        return questionDTOS;
+    }
+
 }

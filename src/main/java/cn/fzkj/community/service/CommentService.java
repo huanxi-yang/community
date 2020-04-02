@@ -4,6 +4,8 @@ import cn.fzkj.community.domain.*;
 import cn.fzkj.community.dto.CommentResultDTO;
 import cn.fzkj.community.dto.QuestionDTO;
 import cn.fzkj.community.enums.CommentTypeEnum;
+import cn.fzkj.community.enums.NotificationStatusEnum;
+import cn.fzkj.community.enums.NotificationTypeEnum;
 import cn.fzkj.community.exception.CustomErrorCode;
 import cn.fzkj.community.exception.CustomException;
 import cn.fzkj.community.mapper.*;
@@ -31,10 +33,12 @@ public class CommentService {
     private UserMapper userMapper;
     @Autowired(required = false)
     private CommentExtMapper commentExtMapper;
+    @Autowired(required = false)
+    private NotificationMapper notificationMapper;
     @Autowired
     private HttpServletRequest request;
 
-    //添加评论
+    // 添加评论
     @Transactional
     public void insert(Comment comment ) {
         User user = (User) request.getSession().getAttribute("user");
@@ -47,35 +51,49 @@ public class CommentService {
 
         if (comment.getType() == CommentTypeEnum.COMMENT.getType()){
             // 回复评论，2级的回复
-            Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
+            Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId()); // 获取回复的那个问题
             if (dbComment == null){
                 throw new CustomException(CustomErrorCode.COMMENT_NOT_FIND);
             }else{
                 //插入
-                commentMapper.insert(comment);
+                commentMapper.insertSelective(comment);
 
                 // 增加评论数
-                System.out.println("CommentService.java lines : 58 不懂");
                 Comment parentComment = new Comment();
                 parentComment.setId(comment.getParentId());
                 parentComment.setCommentCount(1);
                 commentExtMapper.CommentCount(parentComment);
-            }
 
+                // 插入回复，用于通知的显示
+                createNotify(comment, dbComment.getCommentor(), NotificationTypeEnum.REPLAY_COMMENT);
+            }
         }else{
             // 添加评论，1级的评论
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
             if (question == null) {
                 throw new CustomException(CustomErrorCode.QUESTION_NOT_FIND);
             }
-            commentMapper.insert(comment);
+            commentMapper.insertSelective(comment);
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question,questionDTO);
-            System.out.println("CommentServie lines:68:"+questionDTO.toString());
+//            System.out.println("CommentServie lines:74:"+questionDTO.toString());
             // 增加评论数
-            question.setCommentCount(1);
+            questionDTO.setCommentCount(1);
             questionExtMapper.CommentCount(questionDTO);
+
+            createNotify(comment, question.getCreator(), NotificationTypeEnum.REPLAY_QUESTION);
         }
+    }
+
+    private void createNotify(Comment comment, Long receiver, NotificationTypeEnum replayType) {
+        Notification notification = new Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setType(replayType.getType());
+        notification.setNotifier(comment.getCommentor());
+        notification.setOuterid(comment.getParentId());  //被评论的内容id
+        notification.setReceiver(receiver);
+        notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+        notificationMapper.insert(notification);
     }
 
 
@@ -112,5 +130,9 @@ public class CommentService {
         }).collect(Collectors.toList());
 
         return commentResultDTOs;
+    }
+
+    public Comment findById(Long outerid) {
+        return commentMapper.selectByPrimaryKey(outerid);
     }
 }

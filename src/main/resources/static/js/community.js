@@ -4,6 +4,7 @@ function commentTarget(parentId, type, content){
         alert("别这样,多少说点儿~~");
         return ;
     }
+    // debugger;
     $.ajax({
         type: "POST",
         url: "/comment",
@@ -124,3 +125,28 @@ function collageChange(e) {
         }
     }
 }
+
+// 选择标签显示到标签输入框
+function show(e){
+    var value = e.getAttribute("data-tag");
+    var preTag = $("#tag").val();
+    if (preTag.indexOf(value) == -1){
+        if (preTag){
+            $("#tag").val(preTag+","+value);
+        }else{
+            $("#tag").val(value);
+        }
+    }
+}
+
+// 控制标签页的显示和关闭
+// function showTag(){
+$(document).ready(function(){
+
+    $("#tag").focus(function(){
+        $("#tag-show").css("display","block");
+    });
+
+});
+
+// }

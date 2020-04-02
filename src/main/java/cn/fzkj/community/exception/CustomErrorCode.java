@@ -8,7 +8,11 @@ public enum CustomErrorCode implements ICustomErrorCode {
     NOT_LOGIN(2004,"登录状态异常~~"),
     SYSTEM_ERROR(2005,"服务器异常~~"),
     COMMENT_NOT_FIND(2006,"该评论不存在了~~"),
-    CONTENT_NOT_EMPTY(2007,"评论为空~~");
+    CONTENT_NOT_EMPTY(2007,"评论为空~~"),
+    TAG_EMPTY(2008,"标签为空~~"),
+    HAVA_NO_RIGHT(2009,"当前操作没有权限~~"),
+    NOTIFICATION_NOT_FOUND(2010,"找不到~~"),
+    ;
 
     private String message;
     private Integer code;

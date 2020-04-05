@@ -81,7 +81,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/css" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../des" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.14814815" />
@@ -97,11 +97,11 @@
       <recent name="cn.fzkj.community" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\templates" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\css" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\js" />
       <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\md" />
-      <recent name="E:\我爱学习\Interllij Idea\workspace\community\src\main\resources\static\photo" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="cn.fzkj.community.mapper" />
@@ -204,7 +204,11 @@
       <workItem from="1585793424832" duration="4480000" />
       <workItem from="1585798333254" duration="991000" />
       <workItem from="1585799353022" duration="1133000" />
-      <workItem from="1585800509633" duration="12891000" />
+      <workItem from="1585800509633" duration="13141000" />
+      <workItem from="1585884825573" duration="4000000" />
+      <workItem from="1585896797510" duration="9910000" />
+      <workItem from="1585992358470" duration="62000" />
+      <workItem from="1586070274159" duration="1788000" />
     </task>
     <servers />
   </component>

@@ -87,6 +87,7 @@ public class NotificationServiceImpl implements NotificationService {
         //5.设置每页的数据集合
         page = (page-1)*limit;  //计算每页开始的位置
         NotificationExample example = new NotificationExample();
+        example.setOrderByClause("gmt_create desc");
         example.createCriteria().
                 andReceiverEqualTo(id);
         List<Notification> notifications = notificationMapper.selectByExampleWithRowbounds(example, new RowBounds(page,limit));

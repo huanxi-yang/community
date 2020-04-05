@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/community.css">
+    <link rel="stylesheet" href="/css/log.css">
 </head>
 <style>
     .d{
@@ -70,15 +71,21 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading" th:text="${question.title}" th:href="'/question/'+${question.id}"></h4>
+                        <a class="media-heading" th:text="${question.title}" th:href="'/question/'+${question.id}"></a>
                         <span class="topic-info">• <sapn th:text="${question.commentCount}"></sapn> 个评论
                             • <sapn th:text="${question.viewCount}"></sapn> 次浏览
                             • <sapn th:text="${question.likeCount}"></sapn> 次收藏
                             • <sapn th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></sapn> 发表
-                            • <span>
+                            <span>
+                                <a class="topic-info pull-right" th:href="'/del/'+${question.id}"
+                                   th:if="${session.user != null && session.user.id == question.creator}" style="color: red">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true">删除</span>
+                                </a>
+                            </span>
+                            <span>
                                 <a class="topic-info pull-right" th:href="'/publish/'+${question.id}"
                                    th:if="${session.user != null && session.user.id == question.creator}">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true">编辑</span>
+                                    <span class="glyphicon glyphicon-edit" style="margin: 0 5px;" aria-hidden="true">编辑</span>
                                 </a>
                             </span>
                         </span>
@@ -116,8 +123,34 @@
             <hr>
             <span th:each="notify : ${pageBeans.pageRecode}">
                 <span th:text="${notify.user.getName() +'  '+ notify.typeContent+' :  '}">            </span>
-                <span><a th:href="${'/notification/'+notify.id}" th:text="${notify.data}"></a></span><br><hr>
+                <span><a th:href="${'/notification/'+notify.id}" th:text="${notify.data}"></a></span>
+                <span class="label label-info pull-right" th:if="${notify.status == 1}">未读</span>
+                <br>
+                <sapn th:text="${#dates.format(notify.gmtCreate,'yyyy-MM-dd HH:mm')}" class="topic-info"></sapn>
+                <br>
+                <hr>
             </span>
+
+            <nav aria-label="Page navigation" th:align="right" th:if="${pageBeans != null && pageBeans.totalPage>1}">
+                <ul class="pagination">
+                    <li th:if="${pageBeans.totalPage > 5 && pageBeans.page - 3 > 0}">
+                        <!-- 第一页 -->
+                        <a aria-label="Previous" th:href="@{'/profile/'+${section}+'?page=1'}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li  th:each="page:${pageBeans.pages}">
+                        <a th:href="@{'/profile/'+${section}+'?page='+${page}}" th:text="${page}"></a>
+                    </li>
+                    <li>
+                        <!-- 最后一页 -->
+                        <a th:href="@{'/profile/'+${section}+'?page='+${pageBeans.totalPage}}" aria-label="Next"
+                           th:if="${pageBeans.totalPage > 5 && pageBeans.page + 2 < pageBeans.totalPage} ">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
@@ -130,6 +163,8 @@
         </div>
     </div>
 </div>
+
+<div th:insert="~{footer :: footer}"></div>
 
 </body>
 </html>

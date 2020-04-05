@@ -23,7 +23,7 @@ function commentTarget(parentId, type, content){
                 window.location.reload();
             }else{
                 if(response.code == 2004){
-                    var b = confirm("当前为登录~~");
+                    var b = confirm("未登录~~");
                     //打开新页面
                     window.open("https://github.com/login/oauth/authorize?client_id=724df6f6252b3c341a39&redirect_uri=http://localhost:8080/callback&scope=user&state=1");
                     window.localStorage.setItem("localS","true");

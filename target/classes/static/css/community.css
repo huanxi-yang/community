@@ -61,3 +61,9 @@ body{
     padding-left: 0;
 }
 
+.footer{
+    padding: 30px 0 10px;
+    font-size: 12px;
+    text-align: center;
+}
+

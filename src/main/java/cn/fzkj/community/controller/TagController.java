@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 用来验证tag是否有效
  */
 @RestController
-public class TagConngtroller {
+public class TagController {
 // # %23  + %2B
     @ResponseBody
     @RequestMapping("/tagValid.action")

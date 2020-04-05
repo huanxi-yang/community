@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -38,10 +39,16 @@ public class QuestionController {
         // 查找出相关问题
         List<QuestionDTO> relatedQuestions = questionService.selectRelated(questionDTO);
 
-        model.addAttribute("question",questionDTO);
-        model.addAttribute("comments",comments);
-        model.addAttribute("relatedQuestions",relatedQuestions);
+        model.addAttribute("question", questionDTO);
+        model.addAttribute("comments", comments);
+        model.addAttribute("relatedQuestions", relatedQuestions);
         return "question";
+
     }
 
+    @RequestMapping("/del/{id}")
+    public String del(@PathVariable("id") Long id){
+        questionService.delQuesById(id);
+        return "redirect:/profile/questions";
+    }
 }

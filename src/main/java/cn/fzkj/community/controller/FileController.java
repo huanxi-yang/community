@@ -1,6 +1,7 @@
 package cn.fzkj.community.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.UUID;
 
+@Slf4j
 @Controller
 public class FileController {
 
@@ -39,6 +41,7 @@ public class FileController {
         try {
             file.transferTo(targetFile);
         } catch (Exception e) {
+            log.error("图片上传错误,{}",e);
             e.printStackTrace();
         }
 

@@ -2,6 +2,7 @@ package cn.fzkj.community.mapper;
 
 import cn.fzkj.community.domain.Question;
 import cn.fzkj.community.domain.QuestionExample;
+import cn.fzkj.community.dto.QuesQueryDTO;
 import cn.fzkj.community.dto.QuestionDTO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
@@ -14,4 +15,8 @@ public interface QuestionExtMapper {
     void incView(QuestionDTO questionDTO);
 
     List<Question> selectRelated(Question question);
+
+    Integer countBySearch(QuesQueryDTO quesQueryDTO);
+
+    List<Question> selectBySearch(QuesQueryDTO quesQueryDTO);
 }

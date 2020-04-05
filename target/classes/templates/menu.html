@@ -1,10 +1,80 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="/js/community.js"></script>
+</head>
 
 <body>
 
     <div th:fragment="menu">
+        <script>
+            function check_search(){
+                var val = $("#search").val();
+                if (val == null || val == ""){
+                    alert("输入要搜索的内容~~");
+                    return false;
+                }
+            }
+        </script>
+
+        <!--登录框-->
+        <div class="modal fade" id="myLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <!--    <div class="modal-dialog" role="document">-->
+            <!--        <div class="modal-content">-->
+            <!--            <div class="modal-header">-->
+            <!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <!--            </div>-->
+
+            <form action="#" class="login-form">
+                <h1>Login</h1>
+
+                <div class="textb">
+                    <input type="text">
+                    <span data-placeholder="Username"></span>
+                </div>
+
+                <div class="textb">
+                    <input type="password">
+                    <span data-placeholder="Password"></span>
+                </div>
+
+                <input type="submit" class="loginbtn" value="Login">
+
+                <!-- <div class="button-text">
+                    Don't have account?<a href="#">Sign up</a>
+                </div> -->
+                <hr>
+                <br>
+                <div class="github">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <a
+                                href="https://github.com/login/oauth/authorize?client_id=724df6f6252b3c341a39&redirect_uri=http://localhost:8080/callback&scope=user&state=1">
+                            <img src="/images/Github.png" height="32" width="32" title="Github登录" />
+                        </a>
+
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- 放在form表单之后才生效 -->
+            <script type="text/javascript">
+                $(".textb input").on("focus", function () {
+                    $(this).addClass("focus");
+                });
+
+                $(".textb input").on("blur", function () {
+                    if ($(this).val() == "")
+                        $(this).removeClass("focus");
+                });
+            </script>
+            <!--        </div>-->
+            <!--    </div>-->
+        </div>
+
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -14,15 +84,18 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <form class="navbar-form navbar-left">
+                    <form class="navbar-form navbar-left" action="/" onsubmit="return check_search();">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" name="search" id="search" class="form-control" placeholder="Search">
                         </div>
                         <button type="submit" class="btn btn-default">搜索</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li th:if="${session.user == null}">
-                            <a href="/toLogin.action">登录</a>
+<!--                            <a href="/toLogin.action">登录</a>-->
+                            <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#myLogin" style="
+    margin-top: 7px;
+">登录</button>
                         </li>
                         <li>
                         <li th:if="${session.user != null}">
@@ -30,7 +103,7 @@
     margin-top: 7px;
 ">发起</button>
                         </li>
-                        <li>
+                        <li th:if="${session.user != null}">
                             <a href="/profile/reply">通知 <span class="badge" th:if="${session.unreadCount != 0}" th:text="${session.unreadCount}" style="background-color: #f77676"></span></a>
                         </li>
                         <li class="dropdown" th:if="${session.user != null}">

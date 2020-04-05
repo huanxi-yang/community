@@ -1,10 +1,13 @@
 package cn.fzkj.community.service;
 
+import cn.fzkj.community.cache.TagCache;
 import cn.fzkj.community.domain.Question;
 import cn.fzkj.community.domain.QuestionExample;
 import cn.fzkj.community.domain.User;
 import cn.fzkj.community.dto.PageBean;
+import cn.fzkj.community.dto.QuesQueryDTO;
 import cn.fzkj.community.dto.QuestionDTO;
+import cn.fzkj.community.dto.TagDTO;
 import cn.fzkj.community.exception.CustomErrorCode;
 import cn.fzkj.community.exception.CustomException;
 import cn.fzkj.community.mapper.QuestionExtMapper;
@@ -17,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +52,11 @@ public class QuestionService {
     }
 
     //查询所有的问题回显到index页面
-    public PageBean<QuestionDTO> questionList(Integer page) {
+    public PageBean<QuestionDTO> questionList(String search,Integer page) {
+        if (StringUtils.isNotBlank(search)){
+            String[] split = StringUtils.split(search, " ");
+            search = Arrays.stream(split).collect(Collectors.joining("|"));
+        }
         List<QuestionDTO> list = new ArrayList<>();
         PageBean<QuestionDTO> pagesinfo = new PageBean<>();
         pagesinfo.setPage(page);
@@ -56,7 +64,9 @@ public class QuestionService {
         Integer limit = 5;
         pagesinfo.setLimit(limit);
         //2.设置总记录数
-        Integer total = (int)questionMapper.countByExample(new QuestionExample());
+        QuesQueryDTO quesQueryDTO = new QuesQueryDTO();
+        quesQueryDTO.setSearch(search);
+        Integer total = questionExtMapper.countBySearch(quesQueryDTO);
         pagesinfo.setTotal(total);
         //3.设置总的页数
         Integer totalPage;
@@ -96,7 +106,9 @@ public class QuestionService {
         page = (page-1)*limit;  //计算每页开始的位置
         QuestionExample questionExample = new QuestionExample();
         questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample,new RowBounds(page,limit));
+        quesQueryDTO.setPage(page);
+        quesQueryDTO.setLimit(limit);
+        List<Question> questions = questionExtMapper.selectBySearch(quesQueryDTO);
         for(Question question : questions){
             User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -213,4 +225,7 @@ public class QuestionService {
         return questionDTOS;
     }
 
+    public void delQuesById(Long id) {
+        questionMapper.deleteByPrimaryKey(id);
+    }
 }

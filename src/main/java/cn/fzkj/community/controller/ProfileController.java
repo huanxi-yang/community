@@ -22,10 +22,8 @@ public class ProfileController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private QuestionService questionService;
-
     @Autowired
     private NotificationService notificationService;
 
@@ -37,7 +35,7 @@ public class ProfileController {
         User user = (User)request.getSession().getAttribute("user");
         if (user == null){
             //还没有登陆,跳转到登录页面
-            return "redirect:/toLogin.action";
+            return "redirect:/";
         }
         else if("questions".equals(action)){
             // 查出来我的问题

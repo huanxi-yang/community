@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/editormd.css">
+    <link rel="stylesheet" href="css/log.css">
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/community.js"></script>
     <script src="/js/question.js"></script>
@@ -147,7 +148,6 @@
     </div>
 </div>
 
-
 <div class="container-fluid main d">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
@@ -164,7 +164,11 @@
                         <h4 class="media-heading">
                             <a th:href="'/question/'+${question.id}" th:text="${question.title}"></a>
                         </h4>
-                        <span class="topic-info">• <sapn th:text="${question.commentCount}"></sapn> 个评论 • <sapn th:text="${question.viewCount}"></sapn> 次浏览 • <sapn th:text="${question.likeCount}"></sapn> 次收藏 • <sapn th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></sapn> 发表</span>
+                        <span class="topic-info">
+                            • <sapn th:text="${question.commentCount}"></sapn> 个评论
+                            • <sapn th:text="${question.viewCount}"></sapn> 次浏览 • <sapn th:text="${question.likeCount}"></sapn> 次收藏
+                            • <sapn th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></sapn> 发表
+                        </span>
                     </div>
                     <hr>
                 </div>
@@ -180,11 +184,11 @@
                         </a>
                     </li>
                     <li  th:each="page:${pageBean.pages}">
-                        <a th:href="@{'/?page='+${page}}" th:text="${page}"></a>
+                        <a th:href="@{/(page=${page})}" th:text="${page}"></a>
                     </li>
                     <li>
                         <!-- 最后一页 -->
-                        <a th:href="@{'/?page='+${pageBean.totalPage}}" aria-label="Next"
+                        <a th:href="@{/(page=${pageBean.totalPage})}" aria-label="Next"
                            th:if="${pageBean.totalPage > 5 && pageBean.page + 2 < pageBean.totalPage} ">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
@@ -206,6 +210,8 @@
 
     </div>
 </div>
+
+<div th:insert="~{footer :: footer}"></div>
 
 </body>
 </html>

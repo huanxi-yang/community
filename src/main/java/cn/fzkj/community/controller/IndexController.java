@@ -32,10 +32,12 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(HttpServletRequest request, Model model,
-                        @RequestParam(name = "page", defaultValue = "1") Integer page){
+                        @RequestParam(name = "page", defaultValue = "1") Integer page,
+                        @RequestParam(name = "search", required = false) String search){
 
-        PageBean<QuestionDTO> pageBean = questionService.questionList(page);
+        PageBean<QuestionDTO> pageBean = questionService.questionList(search, page);
         model.addAttribute("pageBean",pageBean);
+        model.addAttribute("search",search);
         // 添加标签库
         model.addAttribute("tags", TagCache.getTag());
         return "index";
